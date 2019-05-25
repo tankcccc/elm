@@ -1,0 +1,13 @@
+import {fetchLocation} from '@/api/location'
+import * as types from './mutation-types'
+
+export default{
+	//获取定位信息
+	getLocation({commit}){
+		fetchLocation().then(pos=>{
+			commit(types.RECEIVE_LOCATION,pos)
+		}).catch(err=>{
+			console.log(err)
+		})
+	}
+}
