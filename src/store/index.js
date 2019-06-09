@@ -5,6 +5,7 @@ import getters from './getters'
 import mutations from './mutations'
 import actions from './actions'
 
+//定义初始状态
 const state={
 	latitude:'',	
 	longitude:''
