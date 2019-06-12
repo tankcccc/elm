@@ -74,13 +74,19 @@
 			</div>
 		</section>
 		<elm-tabbar></elm-tabbar>
+		
+		
+		<!--地址组件-->
+		<elm-address></elm-address>
 	</section>
 </template>
 
 <script>
 import Tabbar from 	'@/components/footer/Tabbar'
+import Address from './Address'
 //import {fetchLocation} from '@/api/location'
-import { mapActions } from 'vuex'
+import {mapState, mapActions } from 'vuex'
+import {getAddress} from '@/api/location'
 export default{
 	data(){
 		return{
@@ -90,8 +96,15 @@ export default{
 			}
 		}
 	},
+	computed:{
+		...mapState([
+			'latitude',
+			'longitude'
+		])
+	},
 	components:{
-		'elm-tabbar':Tabbar
+		'elm-tabbar':Tabbar,
+		'elm-address':Address
 	},
 //	created (){
 //		fetchLocation().then(pos=>{
@@ -106,7 +119,18 @@ export default{
 			])
 	},
 	created(){
-		this.getLocation()
+		this.getLocation().then(()=>{
+//			表示成功了,就获取定位信息
+			getAddress(this.latitude, this.longitude).then(res=>{
+				console.log(res)
+				
+			}).catch(err=>{
+				console.log(err)
+			})
+		}).catch(err=>{
+				console.log(err)
+		})
+		
 	}
 }
 </script>

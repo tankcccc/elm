@@ -16,9 +16,22 @@ export function fetchLocation (){ //函数一定要有空格,设置你 的过期
 }
 
 
+
+//根据经纬度获取地址信息
+export function getAddress (latitude, longitude){
+	let url = 'https://restapi.ele.me/bgs/poi/reverse_geo_coding'
+	let params = {latitude, longitude}
+	return new Promise((resolve, reject)=>{
+		axios.get(url, {params}).then(res=>{
+			resolve(res)
+		}).catch(err=>{
+			reject(err)
+		})
+	})
+}
 //根据经纬度获取地址信息
 
-//export function getAddress(latitude, longitude){
+//export function getAddress (latitude, longitude){
 //	let url ='https://restapi.ele.me/bgs/poi/reverse_geo_coding'
 //	let params = {latitude , longitude}
 //	return new Promise((resolve, reject)=>{
@@ -28,6 +41,4 @@ export function fetchLocation (){ //函数一定要有空格,设置你 的过期
 //			reject(err)
 //		})
 //	})
-//	
-
-
+//}	
